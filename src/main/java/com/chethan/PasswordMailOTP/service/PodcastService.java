@@ -202,4 +202,8 @@ public class PodcastService {
         podcastRepo.delete(podcast);
         return "Podcast deleted Successfully!";
     }
+
+    public List<String> getAllCategories(){
+        return podcastRepo.findAllDistinctCategories();
+    }
 }

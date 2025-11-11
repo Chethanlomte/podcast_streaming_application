@@ -6,6 +6,7 @@ import com.chethan.PasswordMailOTP.exception.ResourceNotFoundException;
 import com.chethan.PasswordMailOTP.service.PodcastService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -178,5 +179,17 @@ public class PodcastController {
     @GetMapping("/deletePodcast/{podId}")
     public String deletePodcast(@PathVariable Long podId){
         return podcastService.deletePodcast(podId);
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<?> getAllCategories(){
+        List<String> categories = podcastService.getAllCategories();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("count", categories.size());
+        response.put("categories", categories);
+
+        return ResponseEntity.ok(response);
     }
 }

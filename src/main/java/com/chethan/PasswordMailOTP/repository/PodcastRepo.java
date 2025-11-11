@@ -44,4 +44,7 @@ public interface PodcastRepo extends JpaRepository<Podcast, Long> {
      */
     @Query(value = "SELECT p FROM Podcast p ORDER BY p.views DESC")
     List<Podcast> findTopNByOrderByViewsDesc(org.springframework.data.domain.Pageable pageable);
+
+    @Query("SELECT DISTINCT p.category FROM Podcast p WHERE p.category IS NOT NULL")
+    List<String> findAllDistinctCategories();
 }
