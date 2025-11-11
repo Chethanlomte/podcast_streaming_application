@@ -192,4 +192,21 @@ public class PodcastController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/categories/{category}")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getPodcastsByCategories(
+            @PathVariable String category,
+            @RequestParam(defaultValue = "0")int page,
+            @RequestParam(defaultValue = "10")int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Podcast> podcasts = podcastService.getPodcastsByCategory(category, pageable);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("podcast",podcasts.getContent());
+        response.put("currentPage", podcasts.getNumber());
+        response.put("totalItems", podcasts.getTotalElements());
+        response.put("totalPages", podcasts.getTotalPages());
+
+        return ResponseEntity.ok(ApiResponse.success("Podcasts retrieved successfully by category", response));
+    }
 }

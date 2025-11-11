@@ -47,4 +47,5 @@ public interface PodcastRepo extends JpaRepository<Podcast, Long> {
 
     @Query("SELECT DISTINCT p.category FROM Podcast p WHERE p.category IS NOT NULL")
     List<String> findAllDistinctCategories();
+
 }

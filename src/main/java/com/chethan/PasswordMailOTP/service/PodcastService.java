@@ -6,6 +6,7 @@ import com.chethan.PasswordMailOTP.util.YouTubeDurationFetcher;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -205,5 +206,8 @@ public class PodcastService {
 
     public List<String> getAllCategories(){
         return podcastRepo.findAllDistinctCategories();
+    }
+    public Page<Podcast> findByCategoryIgnoreCase(String category, Pageable pageable){
+        return podcastRepo.findByCategoryIgnoreCase(category, pageable);
     }
 }
