@@ -170,7 +170,7 @@ public class PodcastService {
         if (category == null || category.isBlank()) {
             return Page.empty(pageable);
         }
-        return podcastRepo.findByCategoryIgnoreCase(category, pageable);
+        return podcastRepo.findDistinctByCategoryIgnoreCase(category, pageable);
     }
     
     /**
@@ -208,6 +208,6 @@ public class PodcastService {
         return podcastRepo.findAllDistinctCategories();
     }
     public Page<Podcast> findByCategoryIgnoreCase(String category, Pageable pageable){
-        return podcastRepo.findByCategoryIgnoreCase(category, pageable);
+        return podcastRepo.findDistinctByCategoryIgnoreCase(category, pageable);
     }
 }

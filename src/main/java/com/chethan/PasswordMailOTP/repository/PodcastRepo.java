@@ -35,8 +35,11 @@ public interface PodcastRepo extends JpaRepository<Podcast, Long> {
      * @param pageable pagination information
      * @return Page of podcasts in the specified category
      */
-    Page<Podcast> findByCategoryIgnoreCase(String category, Pageable pageable);
-    
+    @Query("SELECT DISTINCT p FROM Podcast p LEFT JOIN FETCH p.favorites WHERE LOWER(p.category) = LOWER(:category)")
+    Page<Podcast> findDistinctByCategoryIgnoreCase(@Param("category") String category, Pageable pageable);
+
+
+
     /**
      * Find top N podcasts ordered by view count in descending order
      * @param limit maximum number of podcasts to return

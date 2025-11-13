@@ -1,6 +1,7 @@
 package com.chethan.PasswordMailOTP.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,8 +10,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "podcasts")
-@Setter
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -40,8 +39,12 @@ public class Podcast {
     @OneToMany(mappedBy = "podcast", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Favorite> favorites;
 
-    @ManyToMany(mappedBy = "podcasts", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "podcasts",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Playlist> playlists;
+
 
     @Column(name = "duration")
     private Double duration;
