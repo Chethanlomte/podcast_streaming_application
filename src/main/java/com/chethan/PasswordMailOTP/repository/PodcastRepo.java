@@ -35,10 +35,11 @@ public interface PodcastRepo extends JpaRepository<Podcast, Long> {
      * @param pageable pagination information
      * @return Page of podcasts in the specified category
      */
-    @Query("SELECT DISTINCT p FROM Podcast p LEFT JOIN FETCH p.favorites WHERE LOWER(p.category) = LOWER(:category)")
-    Page<Podcast> findDistinctByCategoryIgnoreCase(@Param("category") String category, Pageable pageable);
+//    @Query("SELECT DISTINCT p FROM Podcast p LEFT JOIN FETCH p.favorites WHERE LOWER(p.category) = LOWER(:category)")
+//    Page<Podcast> findDistinctByCategoryIgnoreCase(@Param("category") String category, Pageable pageable);
 
-
+    // Category filter (NO FETCH JOIN – works perfectly with pagination)
+    Page<Podcast> findDistinctByCategoryIgnoreCase(String category, Pageable pageable);
 
     /**
      * Find top N podcasts ordered by view count in descending order
@@ -50,5 +51,9 @@ public interface PodcastRepo extends JpaRepository<Podcast, Long> {
 
     @Query("SELECT DISTINCT p.category FROM Podcast p WHERE p.category IS NOT NULL")
     List<String> findAllDistinctCategories();
+
+    List<Podcast> findByFeaturedTrue();
+
+    List<Podcast> findAllByOrderByLastUpdatedDesc();
 
 }

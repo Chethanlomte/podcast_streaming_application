@@ -210,4 +210,13 @@ public class PodcastService {
     public Page<Podcast> findByCategoryIgnoreCase(String category, Pageable pageable){
         return podcastRepo.findDistinctByCategoryIgnoreCase(category, pageable);
     }
+
+    public List<Podcast> getFeaturedPodcasts(){
+        return podcastRepo.findByFeaturedTrue();
+    }
+
+    public List<Podcast> findAllByOrderByLastUpdatedDesc()
+    {
+        return podcastRepo.findAllByOrderByLastUpdatedDesc();
+    }
 }

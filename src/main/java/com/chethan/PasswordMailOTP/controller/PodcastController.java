@@ -209,4 +209,18 @@ public class PodcastController {
 
         return ResponseEntity.ok(ApiResponse.success("Podcasts retrieved successfully by category", response));
     }
+
+    @GetMapping("/featured")
+    public ResponseEntity<List<Podcast>> getFeaturedPodcast()
+    {
+        List<Podcast> featured = podcastService.getFeaturedPodcasts();
+        return ResponseEntity.ok(featured);
+    }
+
+    @GetMapping("/recentlyAdded")
+    public ResponseEntity<List<Podcast>> getRecentlyAddedPodcasts(){
+        List<Podcast> recent = podcastService.findAllByOrderByLastUpdatedDesc();
+        return ResponseEntity.ok(recent);
+    }
+    
 }

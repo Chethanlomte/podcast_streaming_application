@@ -1,5 +1,6 @@
 package com.chethan.PasswordMailOTP.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,5 +23,6 @@ public class Favorite {
 
     @ManyToOne
     @JoinColumn(name = "podcast_id")
+    @JsonIgnore
     private Podcast podcast;
 }

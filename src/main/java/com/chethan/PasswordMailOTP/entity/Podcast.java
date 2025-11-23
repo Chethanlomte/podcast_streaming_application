@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Data
+
 public class Podcast {
 
     @Id
@@ -31,12 +32,16 @@ public class Podcast {
     private LocalDateTime lastUpdated;
     private String sourceType;
 
+    private boolean featured;
+
     private Long views = (long) 0;
 
     @OneToMany(mappedBy = "podcast", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<PlaybackHistory> playbackHistories;
 
     @OneToMany(mappedBy = "podcast", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Favorite> favorites;
 
     @ManyToMany(mappedBy = "podcasts",
