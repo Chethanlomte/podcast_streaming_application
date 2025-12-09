@@ -1,3 +1,34 @@
-Developed a backend capable of consuming external podcast metadata.
-• Added playback tracking, resume, trending logic, and secure CRUD APIs.
-• Built search, pagination, category filtering, and JPA-based relational handling for Users, Favorites, and Playback History.
+A scalable backend system built using Spring Boot, JPA/Hibernate, and MySQL to deliver a smooth podcast streaming experience.
+
+🚀 Features
+
+🔹 Podcast Module
+
+Category-based filtering
+Trending podcasts (based on views)
+Featured podcasts
+Recently uploaded podcasts
+Pagination & optimized search
+Clean JPA relationships (One-to-Many, Many-to-Many)
+
+🔹 User Module
+
+JWT-based authentication
+User profile management (view + update)
+Premium subscription system (30, 90, 180, 365 days)
+Secure validation for email, password & phone number
+
+🔹 Activity Module
+
+Playback tracking
+Resume listening feature
+Favorites & playlist management
+
+
+🛠 Tech Stack
+
+Java, Spring Boot
+Spring Security (JWT)
+JPA / Hibernate
+MySQL
+REST API Architecture
